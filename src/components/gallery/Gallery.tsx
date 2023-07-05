@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {photos, PhotoType} from "../../state/state";
-import style from "Style.module.css"
+import style from "./Style.module.css"
 
 
 export const Gallery = () => {

@@ -5,41 +5,47 @@ import style from './style.module.css'
 export const Gallery = () => {
 
     const [viewMode, setViewMode] = useState<boolean>(false)
-    const [image, setImage] = useState<string>('')
+    const [item, setItem] = useState<PhotoType | null>(null)
 
 
-    const getImage = (imageUrl: string) => {
-        setImage(imageUrl)
+    const getItem = (item: PhotoType) => {
+        setItem(item)
         setViewMode(true)
     }
+
     const closeImage = () => {
-        setImage('')
+        setItem(null)
         setViewMode(false)
     }
 
     return (
-        <>
-            <div className={viewMode ? `${style.model} ${style.open}` : style.model}>
-                <img src={image}/>
-                <button className={style.button} onClick={closeImage}>X</button>
-            </div>
-            <section className={style.gallery}>
-                <h1 className={style.title}>Gallery</h1>
-                <div className={style.galleryList}>
-                    {photos.map((photo: PhotoType, index) => {
-                        return (
+
+        <section className={style.gallery}>
+            <h1 className={style.title}>Gallery</h1>
+            <div className={style.galleryList}>
+                {photos.map((photo: PhotoType, index) => {
+                    const getItemHandler = () => getItem(photo)
+                    return (
+                        <>
+                            <div className={viewMode ? `${style.model} ${style.open}` : style.model}>
+                                <h2 className={style.photoTitle}>{item?.title}</h2>
+                                <div className={style.photoTitle}>{item?.description}</div>
+                                <img src={item?.imageUrl}/>
+                                <button className={style.button} onClick={closeImage}>X</button>
+                            </div>
                             <div
                                 className={style.galleryItem}
                                 key={index}
-                                onClick={() => getImage(photo.imageUrl)}>
+                                onClick={getItemHandler}>
                                 <div className={style.galleryItemHover}>Посмотреть</div>
                                 <img src={photo.imageUrl} alt={photo.title}/>
                             </div>
-                        )
-                    })}
-                </div>
-            </section>
-        </>
+                        </>
+
+                    )
+                })}
+            </div>
+        </section>
 
     );
 };

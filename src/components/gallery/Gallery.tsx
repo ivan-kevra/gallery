@@ -12,11 +12,16 @@ export const Gallery = () => {
         setImage(imageUrl)
         setViewMode(true)
     }
+    const closeImage = () => {
+        setImage('')
+        setViewMode(false)
+    }
 
     return (
         <>
             <div className={viewMode ? `${style.model} ${style.open}` : style.model}>
                 <img src={image}/>
+                <button className={style.button} onClick={closeImage}>X</button>
             </div>
             <section className={style.gallery}>
                 <h1 className={style.title}>Gallery</h1>

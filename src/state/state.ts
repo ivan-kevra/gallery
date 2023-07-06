@@ -2,6 +2,7 @@ export type PhotoType = {
     title: string
     description: string
     imageUrl: string
+
 }
 
 export const photos: PhotoType[] = [

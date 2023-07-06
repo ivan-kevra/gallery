@@ -3,7 +3,7 @@ import style from "./Style.module.css"
 import {Photo} from "../photo/Photo";
 import {initialComments, photos, PhotoType} from "../../state/state";
 
-
+type FilterType = 'all' | 'noDescription' | 'withDescription'
 export const Gallery = () => {
         const [viewMode, setViewMode] = useState<boolean>(false)
         const [id, setId] = useState(0)
@@ -30,13 +30,21 @@ export const Gallery = () => {
             setDescription('')
             setViewMode(false)
         }
+
+        const [filter, setFilter] = useState<FilterType>('all')
+        let filteredPhotos = photos
+        if (filter === 'noDescription') {
+            filteredPhotos = photos.filter(photo => photo.description === '')
+        }
+        if (filter === 'withDescription') {
+            filteredPhotos = photos.filter(photo => photo.description !== '')
+        }
         return (
             <section className={style.gallery}>
                 <h1 className={style.title}>Gallery</h1>
                 <div className={style.galleryList}>
-                    {photos.map((photo: PhotoType) => {
+                    {filteredPhotos.map((photo: PhotoType) => {
                         const getItemHandler = () => getItem(photo.id, photo.imageURL, photo.title, photo.description)
-                        const commentsFiltered = comments[id]
                         return (
                             <>
                                 <div key={photo.id}
@@ -44,7 +52,7 @@ export const Gallery = () => {
                                     <Photo key={photo.id}
                                            closeImage={closeImage}
                                            addComment={addComment}
-                                           comments={commentsFiltered}
+                                           comments={comments[id]}
                                            id={id}
                                            title={title}
                                            description={description}
@@ -57,6 +65,9 @@ export const Gallery = () => {
                                     <div className={style.galleryItemHover}>Посмотреть</div>
                                     <img src={photo.imageURL} alt={photo.title}/>
                                 </div>
+                                <button onClick={() => setFilter('all')}>all</button>
+                                <button onClick={() => setFilter('noDescription')}>noDescription</button>
+                                <button onClick={() => setFilter('withDescription')}>withDescription</button>
                             </>
 
                         )

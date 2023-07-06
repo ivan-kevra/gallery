@@ -33,7 +33,7 @@ export const photos: PhotoType[] = [
     {
         id: tlId3,
         title: 'Sunset',
-        description: 'Sunset is the daily event when the sun descends below the horizon in the west, giving way to the darkness of night. During a sunset, the sky is often painted with a range of beautiful colors, including oranges, pinks, purples, and reds.',
+        description: '',
         imageURL: 'https://i.pinimg.com/564x/09/47/db/0947db859f8bbec51f4f85d030c59b03.jpg',
     },
     {
@@ -53,11 +53,7 @@ export const photos: PhotoType[] = [
     {
         id: tlId6,
         title: 'River in Italy',
-        description: 'Italy is home to several beautiful and historic rivers that flow through its diverse landscapes, including the Po, Tiber, Arno, Adige, and Brenta rivers. Here are brief descriptions of some of the most notable:\n' +
-            '\n' +
-            'Po River - The Po is the longest river in Italy, stretching over 400 miles from the Cottian Alps to the Adriatic Sea. The Po River plays an important role in the country\'s economy, providing irrigation for agriculture, as well as transportation and hydroelectric power.\n' +
-            '\n' +
-            'Tiber River - The Tiber is the second-longest river in Italy and flows through the heart of Rome. The river is famous for its historic bridges, including the Ponte Vecchio and Ponte Sant\'Angelo, and its role in the city\'s history and culture.',
+        description: '',
         imageURL: 'https://i.pinimg.com/564x/a3/bd/99/a3bd99ff636a9cd1c51b07c65f1aae60.jpg',
     },
     {

@@ -1,34 +1,39 @@
 import React, {ChangeEvent, useState} from 'react';
 import style from "../gallery/Style.module.css";
-import {PhotoType} from "../../state/state";
+import {initialCommentsType, PhotoType} from "../gallery/Gallery";
 
 type PhotoPropsType = {
+    photoId: number
     item: PhotoType | null
     closeImage: () => void
+    addComment: (photoId: number, newComment: string) => void
+    comments: initialCommentsType
+
 }
-export const Photo = ({item, closeImage}: PhotoPropsType) => {
-        const [comment, setComment] = useState<string>('')
+export const Photo = (props: PhotoPropsType) => {
+        const [comment, setComment] = useState('')
         const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
             setComment(event.currentTarget.value)
         }
-        const addComment = (newComment: string) => {
+        const addCommentHandler = () => {
+            props.addComment(props.photoId, comment)
             setComment('')
         }
         return (
             <>
-                <img src={item?.imageUrl}/>
+                <img src={props.item?.imageUrl}/>
                 <div className={style.text}>
-                    <h2 className={style.photoTitle}>{item?.title}</h2>
-                    <div className={style.photoTitle}>{item?.description}</div>
+                    <h2 className={style.photoTitle}>{props.item?.title}</h2>
+                    <div className={style.photoTitle}>{props.item?.description}</div>
                     <div className={style.commentContainer}>
                         <input value={comment} onChange={onChangeHandler}/>
-                        <button onClick={() => addComment(comment)}>add comment</button>
+                        <button onClick={addCommentHandler}>add comment</button>
                     </div>
                     <div>
-                        {item?.comments.map((comment) => <div>{comment}</div>)}
+                        {props.comments[props.photoId].map((com) => <div>{com}</div>)}
                     </div>
                 </div>
-                <button className={style.button} onClick={closeImage}>X</button>
+                <button className={style.button} onClick={props.closeImage}>X</button>
             </>
         );
     }

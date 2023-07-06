@@ -74,12 +74,12 @@ export const photos: PhotoType[] = [
     },
 ]
 export const initialComments: initialCommentsType = {
-    [tlId1]: ['1 comment'],
-    [tlId2]: ['2 comment'],
+    [tlId1]: ['1 comment', '4 comment', '4 comment'],
+    [tlId2]: ['2 comment', '4 comment'],
     [tlId3]: ['3 comment'],
-    [tlId4]: ['4 comment'],
-    [tlId5]: ['5 comment'],
-    [tlId6]: ['6 comment'],
-    [tlId7]: ['7 comment'],
-    [tlId8]: ['8 comment'],
+    [tlId4]: ['4 comment', '4 comment', '4 comment', '4 comment'],
+    [tlId5]: ['5 comment', '4 comment'],
+    [tlId6]: ['6 comment', '4 comment', '4 comment', '4 comment', '4 comment'],
+    [tlId7]: ['7 comment', '4 comment'],
+    [tlId8]: ['8 comment', '4 comment', '4 comment', '4 comment', '4 comment', '4 comment', '4 comment'],
 }

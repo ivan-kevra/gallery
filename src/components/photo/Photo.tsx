@@ -21,6 +21,9 @@ export const Photo = (props: PhotoPropsType) => {
             props.addComment(comment)
             setComment('')
         }
+
+
+
         return (
             <>
                 <button className={style.button} onClick={props.closeImage}>X</button>
@@ -35,9 +38,9 @@ export const Photo = (props: PhotoPropsType) => {
                                     <li className={style.photoComment}>{comment}</li>))}
                             </ul>
                             <div>
-                                <label htmlFor="comment-text">Добавить комментарий:</label>
+                                <label htmlFor="comment-text">Add comment:</label>
                                 <input type="text" value={comment} onChange={onChangeHandler}/>
-                                <button type="submit" onClick={addCommentHandler}>Отправить</button>
+                                <button type="submit" onClick={addCommentHandler}>ADD</button>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
-import style from "../gallery/Style.module.css";
+import style from "./Style.module.css";
 
 type PhotoPropsType = {
     closeImage: () => void
@@ -13,8 +13,6 @@ type PhotoPropsType = {
 
 }
 export const Photo = (props: PhotoPropsType) => {
-
-
         const [comment, setComment] = useState('')
         const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
             setComment(event.currentTarget.value)
@@ -23,22 +21,27 @@ export const Photo = (props: PhotoPropsType) => {
             props.addComment(comment)
             setComment('')
         }
-        console.log(typeof props.comments)
         return (
             <>
-                <img src={props.imageURL}/>
-                <div className={style.text}>
-                    <h2 className={style.photoTitle}>{props.title}</h2>
-                    <div className={style.photoTitle}>{props.description}</div>
-                    <div className={style.commentContainer}>
-                        <input value={comment} onChange={onChangeHandler}/>
-                        <button onClick={addCommentHandler}>add comment</button>
-                    </div>
-                    <div>
-                        {props.comments && props.comments.map((comment) => <div>{comment}</div>)}
+                <button className={style.button} onClick={props.closeImage}>X</button>
+                <div className={style.container}>
+                    <div className={style.photo}>
+                        <img className={style.photoImage} src={props.imageURL} alt="Фото 1"/>
+                        <div className={style.photoDetails}>
+                            <h2 className={style.photoTitle}>{props.title}</h2>
+                            <p className={style.photoDescription}>{props.description}</p>
+                            <ul className={style.photoComments}>
+                                {props.comments && props.comments.map(((comment) =>
+                                    <li className={style.photoComment}>{comment}</li>))}
+                            </ul>
+                            <div>
+                                <label htmlFor="comment-text">Добавить комментарий:</label>
+                                <input type="text" value={comment} onChange={onChangeHandler}/>
+                                <button type="submit" onClick={addCommentHandler}>Отправить</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <button className={style.button} onClick={props.closeImage}>X</button>
             </>
         );
     }

@@ -1,10 +1,9 @@
 import React, {ChangeEvent, useState} from 'react';
 import style from "../gallery/Style.module.css";
-import {PhotoType} from "../gallery/Gallery";
 
 type PhotoPropsType = {
     closeImage: () => void
-    addComment: (photoId: number, newComment: string) => void
+    addComment: (newComment: string) => void
     comments: string[]
     id: number
     title: string
@@ -14,14 +13,17 @@ type PhotoPropsType = {
 
 }
 export const Photo = (props: PhotoPropsType) => {
+
+
         const [comment, setComment] = useState('')
         const onChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
             setComment(event.currentTarget.value)
         }
         const addCommentHandler = () => {
-            props.addComment(props.id, comment)
+            props.addComment(comment)
             setComment('')
         }
+        console.log(typeof props.comments)
         return (
             <>
                 <img src={props.imageURL}/>
@@ -33,7 +35,7 @@ export const Photo = (props: PhotoPropsType) => {
                         <button onClick={addCommentHandler}>add comment</button>
                     </div>
                     <div>
-                        {props.comments.map((com, index) => <div key={index}>{com}</div>)}
+                        {props.comments && props.comments.map((comment) => <div>{comment}</div>)}
                     </div>
                 </div>
                 <button className={style.button} onClick={props.closeImage}>X</button>

@@ -80,10 +80,10 @@ export const photos: PhotoType[] = [
 // },
 ]
 export const initialComments: initialCommentsType = {
-    [tlId1]: ['1', '123123123'],
-    [tlId2]: ['2', '123123123'],
-    [tlId3]: ['3', '123123123'],
-    [tlId4]: ['4', '123123123'],
+    [tlId1]: ['1', '3213'],
+    [tlId2]: ['2', 'qwe  3123'],
+    [tlId3]: ['3', '123qwe'],
+    [tlId4]: ['4', '1231 asd as23123'],
     // [tlId5]: ['5', '123123123'],
     // [tlId6]: ['6', '123123123'],
     // [tlId7]: ['7', '123123123'],
@@ -95,28 +95,26 @@ export const Gallery = () => {
         const [viewMode, setViewMode] = useState<boolean>(false)
         const [id, setId] = useState(0)
         const [title, setTitle] = useState('')
-        const [description, setDecription] = useState('')
+        const [description, setDescription] = useState('')
         const [imageURL, setImageURL] = useState('')
         const [comments, setComments] = useState(initialComments)
-        console.log(comments)
-        const addComment = (photoId: number, newComment: string) => {
-            let newComments = comments[photoId]
-            comments[photoId] = [newComment, ...newComments]
+        const addComment = (newComment: string) => {
+            let newComments = comments[id]
+            comments[id] = [newComment, ...newComments]
             setComments({...comments})
         }
         const getItem = (id: number, imageURL: string, title: string, description: string) => {
             setId(id)
             setImageURL(imageURL)
             setTitle(title)
-            setDecription(description)
+            setDescription(description)
             setViewMode(true)
-
         }
         const closeImage = () => {
             setId(0)
             setImageURL('')
             setTitle('')
-            setDecription('')
+            setDescription('')
             setViewMode(false)
         }
 
@@ -126,7 +124,8 @@ export const Gallery = () => {
                 <div className={style.galleryList}>
                     {photos.map((photo: PhotoType) => {
                         const getItemHandler = () => getItem(photo.id, photo.imageURL, photo.title, photo.description)
-                        const commentsFiltered = comments[photo.id]
+                        const commentsFiltered = comments[id]
+                        // console.log(comments)
                         return (
                             <>
                                 <div key={photo.id}
@@ -140,6 +139,10 @@ export const Gallery = () => {
                                            description={description}
                                            imageURL={imageURL}
                                     />
+                                    {/*<div>*/}
+                                    {/*    {comments[id]}*/}
+                                    {/*</div>*/}
+
                                 </div>
                                 <div
                                     className={style.galleryItem}
